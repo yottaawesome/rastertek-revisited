@@ -1,8 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: main.cpp
 ////////////////////////////////////////////////////////////////////////////////
-import frameworkandwindow;
 import win32;
+import frameworkandwindow;
+
+// See https://www.rastertek.com/dx11win10tut02.html
 
 auto WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow) -> int
 {

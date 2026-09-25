@@ -19,9 +19,6 @@ constexpr float SCREEN_NEAR = 0.3f;
 class ApplicationClass
 {
 public:
-	ApplicationClass() = default;
-	ApplicationClass(const ApplicationClass&) = default;
-
 	auto Initialize(int screenWidth, int screenHeight, HWND hwnd) -> bool
 	{
 		return true;

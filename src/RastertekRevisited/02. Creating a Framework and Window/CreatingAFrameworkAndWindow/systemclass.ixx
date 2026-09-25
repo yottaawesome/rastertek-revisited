@@ -24,7 +24,7 @@ public:
 
 	SystemClass(const SystemClass&) = default;
 
-	bool Initialize()
+	auto Initialize() -> bool
 	{
 		// Initialize the width and height of the screen to zero before sending the variables into the function.
 		auto screenWidth = 0;
@@ -137,7 +137,7 @@ private:
 			return false;
 
 		// Do the frame processing for the application class object.
-		if (!m_Application->Frame())
+		if (not m_Application->Frame())
 			return false;
 
 		return true;

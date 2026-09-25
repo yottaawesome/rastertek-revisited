@@ -4,6 +4,9 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/02. Creating a Framework and Window/">
-    <Project Path="02. Creating a Framework and Window/CreatingAFrameworkAndWindow/CreatingAFrameworkAndWindow.vcxproj" />
+    <Project Path="02. Creating a Framework and Window/CreatingAFrameworkAndWindow/CreatingAFrameworkAndWindow.vcxproj" Id="05459b2e-ba2d-4ee2-ae82-6704819b17f7" />
+  </Folder>
+  <Folder Name="/03. Initializing DirectX 11/">
+    <Project Path="03. Initializing DirectX 11/InitializingDirectX11/InitializingDirectX11.vcxproj" Id="a5a29e50-679a-4fde-8072-4624c4c4ebe2" />
   </Folder>
 </Solution>

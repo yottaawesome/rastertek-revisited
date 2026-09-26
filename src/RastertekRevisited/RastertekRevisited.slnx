@@ -9,4 +9,7 @@
   <Folder Name="/03. Initializing DirectX 11/">
     <Project Path="03. Initializing DirectX 11/InitializingDirectX11/InitializingDirectX11.vcxproj" Id="a5a29e50-679a-4fde-8072-4624c4c4ebe2" />
   </Folder>
+  <Folder Name="/04. Buffers, Shaders, and HLSL/">
+    <Project Path="04. Buffers, Shaders, and HLSL/BuffersShadersAndHLSL/BuffersShadersAndHLSL.vcxproj" Id="f9453de8-2393-4558-8f08-7107eb23de12" />
+  </Folder>
 </Solution>

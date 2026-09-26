@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a5a29e50-679a-4fde-8072-4624c4c4ebe2}</ProjectGuid>
-    <RootNamespace>InitializingDirectX11</RootNamespace>
+    <ProjectGuid>{f9453de8-2393-4558-8f08-7107eb23de12}</ProjectGuid>
+    <RootNamespace>BuffersShadersAndHLSL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

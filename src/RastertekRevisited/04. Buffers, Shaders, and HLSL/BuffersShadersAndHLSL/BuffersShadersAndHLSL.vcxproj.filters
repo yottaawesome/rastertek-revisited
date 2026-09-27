@@ -36,5 +36,20 @@
     <ClCompile Include="win32.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="colorshaderclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modelclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cameraclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.vs.hlsl" />
+    <None Include="color.ps.hlsl">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

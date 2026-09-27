@@ -85,7 +85,7 @@ public:
 
 		// Convert the name of the video card to a character array and store it.
 		auto stringLength = 0ull;
-		int error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
+		auto error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
 		if (error != 0)
 			return false;
 
@@ -354,8 +354,6 @@ public:
             m_swapChain->Release();
             m_swapChain = 0;
         }
-
-        return;
     }
 
     void BeginScene(float red, float green, float blue, float alpha)

@@ -150,12 +150,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="applicationclass.ixx" />
+    <ClCompile Include="cameraclass.ixx" />
+    <ClCompile Include="colorshaderclass.ixx" />
+    <ClCompile Include="modelclass.ixx" />
+    <None Include="color.ps.hlsl">
+      <FileType>Document</FileType>
+    </None>
     <ClCompile Include="d3dclass.ixx" />
     <ClCompile Include="demo.ixx" />
     <ClCompile Include="inputclass.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="systemclass.ixx" />
     <ClCompile Include="win32.ixx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.vs.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

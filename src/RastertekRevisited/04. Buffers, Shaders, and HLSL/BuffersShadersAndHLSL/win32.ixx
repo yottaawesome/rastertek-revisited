@@ -4,6 +4,7 @@ module;
 #include <Windows.h>
 #include <d3d11.h>
 #include <directxmath.h>
+#include <d3dcompiler.h>
 
 export module win32;
 
@@ -179,7 +180,9 @@ export
 // D3D
 export using
 	::D3D_FEATURE_LEVEL,
-	::D3D_DRIVER_TYPE
+	::D3D_DRIVER_TYPE,
+	::ID3DBlob,
+	::D3DCompileFromFile
 	;
 
 // DXGI
@@ -216,17 +219,26 @@ export
 // D3D11
 export
 {
+	constexpr auto D3D10ShaderEnableStrictness = D3D10_SHADER_ENABLE_STRICTNESS;
+	constexpr auto D3D11AppendAlignedElement = D3D11_APPEND_ALIGNED_ELEMENT;
+
 	using
 		::ID3D11Device,
 		::ID3D11DeviceContext,
 		::ID3D11RenderTargetView,
+		::D3D11_SUBRESOURCE_DATA,
+		::D3D11_MAPPED_SUBRESOURCE,
 		::ID3D11Texture2D,
 		::ID3D11DepthStencilState,
 		::ID3D11DepthStencilView,
 		::ID3D11RasterizerState,
+		::D3D11_INPUT_ELEMENT_DESC,
+		::D3D11_INPUT_CLASSIFICATION,
+		::D3D11_BUFFER_DESC,
 		::D3D11_CLEAR_FLAG,
 		::DXGI_SWAP_EFFECT,
 		::D3D11_BIND_FLAG,
+		::D3D11_CPU_ACCESS_FLAG,
 		::D3D11_FILL_MODE,
 		::D3D11_CULL_MODE,
 		::D3D11_TEXTURE2D_DESC,
@@ -239,6 +251,10 @@ export
 		::D3D11_DEPTH_WRITE_MASK,
 		::D3D11_COMPARISON_FUNC,
 		::D3D11_STENCIL_OP,
+		::ID3D11VertexShader,
+		::ID3D11PixelShader,
+		::ID3D11InputLayout,
+		::ID3D11Buffer,
 		::D3D11CreateDeviceAndSwapChain
 		;
 
@@ -251,6 +267,14 @@ export namespace DirectX
 		::DirectX::XMMATRIX,
 		::DirectX::XMMatrixPerspectiveFovLH,
 		::DirectX::XMMatrixIdentity,
-		::DirectX::XMMatrixOrthographicLH
+		::DirectX::XMMatrixOrthographicLH,
+		::DirectX::XMMatrixTranspose,
+		::DirectX::XMFLOAT3,
+		::DirectX::XMFLOAT4,
+		::DirectX::XMLoadFloat3,
+		::DirectX::XMMatrixRotationRollPitchYaw,
+		::DirectX::XMVector3TransformCoord,
+		::DirectX::XMVectorAdd,
+		::DirectX::XMMatrixLookAtLH
 		;
 }

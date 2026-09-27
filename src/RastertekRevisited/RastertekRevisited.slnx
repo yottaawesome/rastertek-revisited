@@ -12,4 +12,7 @@
   <Folder Name="/04. Buffers, Shaders, and HLSL/">
     <Project Path="04. Buffers, Shaders, and HLSL/BuffersShadersAndHLSL/BuffersShadersAndHLSL.vcxproj" Id="f9453de8-2393-4558-8f08-7107eb23de12" />
   </Folder>
+  <Folder Name="/05. Texturing/">
+    <Project Path="05. Texturing/Texturing/Texturing.vcxproj" Id="fbcd1591-bc5a-4b6f-bc03-cbf1a055685d" />
+  </Folder>
 </Solution>

@@ -1,6 +1,7 @@
 module;
 
 #define WIN32_LEAN_AND_MEAN
+#include <stdio.h>
 #include <Windows.h>
 #include <d3d11.h>
 #include <directxmath.h>
@@ -43,6 +44,7 @@ export
 		::CreateWindowExW,
 		::ShowCursor,
 		::DestroyWindow,
+		::fopen_s,
 		::GetSystemMetrics,
 		::ChangeDisplaySettingsW,
 		::RegisterClassExW,
@@ -221,7 +223,7 @@ export
 {
 	constexpr auto D3D10ShaderEnableStrictness = D3D10_SHADER_ENABLE_STRICTNESS;
 	constexpr auto D3D11AppendAlignedElement = D3D11_APPEND_ALIGNED_ELEMENT;
-
+	
 	using
 		::ID3D11Device,
 		::ID3D11DeviceContext,
@@ -231,6 +233,9 @@ export
 		::ID3D11Texture2D,
 		::ID3D11DepthStencilState,
 		::ID3D11DepthStencilView,
+		::D3D11_SHADER_RESOURCE_VIEW_DESC,
+		::D3D11_RESOURCE_MISC_FLAG,
+		::D3D11_SAMPLER_DESC,
 		::ID3D11RasterizerState,
 		::D3D11_INPUT_ELEMENT_DESC,
 		::D3D11_MAP,
@@ -253,6 +258,8 @@ export
 		::D3D11_COMPARISON_FUNC,
 		::D3D11_STENCIL_OP,
 		::ID3D11VertexShader,
+		::ID3D11SamplerState,
+		::ID3D11ShaderResourceView,
 		::ID3D11PixelShader,
 		::ID3D11InputLayout,
 		::ID3D11Buffer,
@@ -270,6 +277,7 @@ export namespace DirectX
 		::DirectX::XMMatrixIdentity,
 		::DirectX::XMMatrixOrthographicLH,
 		::DirectX::XMMatrixTranspose,
+		::DirectX::XMFLOAT2,
 		::DirectX::XMFLOAT3,
 		::DirectX::XMFLOAT4,
 		::DirectX::XMLoadFloat3,

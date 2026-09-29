@@ -45,9 +45,17 @@
     <ClCompile Include="win32.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="textureshaderclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps.hlsl" />
     <None Include="color.vs.hlsl" />
+    <None Include="texture.ps.hlsl" />
+    <None Include="texture.vs.hlsl" />
   </ItemGroup>
 </Project>

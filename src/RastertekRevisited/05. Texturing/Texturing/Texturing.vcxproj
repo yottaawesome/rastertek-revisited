@@ -158,6 +158,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="modelclass.ixx" />
     <ClCompile Include="systemclass.ixx" />
+    <ClCompile Include="textureclass.ixx" />
+    <ClCompile Include="textureshaderclass.ixx" />
     <ClCompile Include="win32.ixx" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +167,14 @@
       <FileType>Document</FileType>
     </None>
     <None Include="color.vs.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="texture.ps.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="texture.vs.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

@@ -5,6 +5,7 @@ export module demo:modelclass;
 
 import std;
 import win32;
+import :textureclass;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ModelClass
@@ -15,17 +16,21 @@ private:
 	struct VertexType
 	{
 		DirectX::XMFLOAT3 position;
-		DirectX::XMFLOAT4 color;
+		DirectX::XMFLOAT2 texture;
 	};
 
 public:
-	bool Initialize(ID3D11Device* device)
+	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename) -> bool
 	{
-		bool result;
-
-
 		// Initialize the vertex and index buffers.
-		result = InitializeBuffers(device);
+		bool result = InitializeBuffers(device);
+		if (!result)
+		{
+			return false;
+		}
+
+		// Load the texture for this model.
+		result = LoadTexture(device, deviceContext, textureFilename);
 		if (!result)
 		{
 			return false;
@@ -36,6 +41,9 @@ public:
 
 	void Shutdown()
 	{
+		// Release the model texture.
+		ReleaseTexture();
+
 		// Shutdown the vertex and index buffers.
 		ShutdownBuffers();
 
@@ -48,13 +56,18 @@ public:
 		RenderBuffers(deviceContext);
 	}
 
-	int GetIndexCount()
+	auto GetIndexCount() -> int
 	{
 		return m_indexCount;
 	}
 
+	auto GetTexture() -> ID3D11ShaderResourceView*
+	{
+		return m_Texture->GetTexture();
+	}
+
 private:
-	bool InitializeBuffers(ID3D11Device* device)
+	auto InitializeBuffers(ID3D11Device* device) -> bool
 	{
 		VertexType* vertices;
 		unsigned long* indices;
@@ -71,27 +84,19 @@ private:
 
 		// Create the vertex array.
 		vertices = new VertexType[m_vertexCount];
-		if (!vertices)
-		{
-			return false;
-		}
 
 		// Create the index array.
 		indices = new unsigned long[m_indexCount];
-		if (!indices)
-		{
-			return false;
-		}
 
 		// Load the vertex array with data.
 		vertices[0].position = DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-		vertices[0].color = DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertices[0].texture = DirectX::XMFLOAT2(0.0f, 1.0f);
 
 		vertices[1].position = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
-		vertices[1].color = DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertices[1].texture = DirectX::XMFLOAT2(0.5f, 0.0f);
 
 		vertices[2].position = DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
-		vertices[2].color = DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertices[2].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
 
 		// Load the index array with data.
 		indices[0] = 0;  // Bottom left.
@@ -121,7 +126,7 @@ private:
 		// Set up the description of the static index buffer.
 		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 		indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
-		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		indexBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
 		indexBufferDesc.CPUAccessFlags = 0;
 		indexBufferDesc.MiscFlags = 0;
 		indexBufferDesc.StructureByteStride = 0;
@@ -189,9 +194,37 @@ private:
 		return;
 	}
 
+	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename) -> bool
+	{
+		// Create and initialize the texture object.
+		m_Texture = new TextureClass;
+
+		if (!m_Texture->Initialize(device, deviceContext, filename))
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+
+	void ReleaseTexture()
+	{
+		// Release the texture object.
+		if (m_Texture)
+		{
+			m_Texture->Shutdown();
+			delete m_Texture;
+			m_Texture = 0;
+		}
+
+		return;
+	}
+
 private:
 	ID3D11Buffer* m_vertexBuffer = nullptr;
 	ID3D11Buffer* m_indexBuffer = nullptr;
 	int m_vertexCount = 0;
 	int m_indexCount = 0;
+	TextureClass* m_Texture = nullptr;
 };

@@ -1,0 +1,36 @@
+/////////////
+// LINKING //
+/////////////
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+////////////////////////////////////////////////////////////////////////////////
+// Filename: main.cpp
+////////////////////////////////////////////////////////////////////////////////
+import win32;
+import demo;
+
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
+{
+	SystemClass* System;
+	bool result;
+	
+	
+	// Create the system object.
+	System = new SystemClass;
+
+	// Initialize and run the system object.
+	result = System->Initialize();
+	if(result)
+	{
+		System->Run();
+	}
+
+	// Shutdown and release the system object.
+	System->Shutdown();
+	delete System;
+	System = 0;
+
+	return 0;
+}

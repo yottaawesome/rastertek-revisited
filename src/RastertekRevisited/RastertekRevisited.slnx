@@ -15,4 +15,7 @@
   <Folder Name="/05. Texturing/">
     <Project Path="05. Texturing/Texturing/Texturing.vcxproj" Id="fbcd1591-bc5a-4b6f-bc03-cbf1a055685d" />
   </Folder>
+  <Folder Name="/06. Diffuse Lighting/">
+    <Project Path="06. Diffuse Lighting/DiffuseLighting/DiffuseLighting.vcxproj" Id="8a41ad1c-f9c9-4e1b-8a95-2b32c0bb9454" />
+  </Folder>
 </Solution>

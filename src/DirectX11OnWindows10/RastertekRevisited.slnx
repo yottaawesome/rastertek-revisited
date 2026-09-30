@@ -4,18 +4,18 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/02. Creating a Framework and Window/">
-    <Project Path="02. Creating a Framework and Window/CreatingAFrameworkAndWindow/CreatingAFrameworkAndWindow.vcxproj" Id="05459b2e-ba2d-4ee2-ae82-6704819b17f7" />
+    <Project Path="02. Creating a Framework and Window/CreatingAFrameworkAndWindow.vcxproj" Id="05459b2e-ba2d-4ee2-ae82-6704819b17f7" />
   </Folder>
   <Folder Name="/03. Initializing DirectX 11/">
-    <Project Path="03. Initializing DirectX 11/InitializingDirectX11/InitializingDirectX11.vcxproj" Id="a5a29e50-679a-4fde-8072-4624c4c4ebe2" />
+    <Project Path="03. Initializing DirectX 11/InitializingDirectX11.vcxproj" Id="a5a29e50-679a-4fde-8072-4624c4c4ebe2" />
   </Folder>
   <Folder Name="/04. Buffers, Shaders, and HLSL/">
-    <Project Path="04. Buffers, Shaders, and HLSL/BuffersShadersAndHLSL/BuffersShadersAndHLSL.vcxproj" Id="f9453de8-2393-4558-8f08-7107eb23de12" />
+    <Project Path="04. Buffers, Shaders, and HLSL/BuffersShadersAndHLSL.vcxproj" Id="f9453de8-2393-4558-8f08-7107eb23de12" />
   </Folder>
   <Folder Name="/05. Texturing/">
-    <Project Path="05. Texturing/Texturing/Texturing.vcxproj" Id="fbcd1591-bc5a-4b6f-bc03-cbf1a055685d" />
+    <Project Path="05. Texturing/Texturing.vcxproj" Id="fbcd1591-bc5a-4b6f-bc03-cbf1a055685d" />
   </Folder>
   <Folder Name="/06. Diffuse Lighting/">
-    <Project Path="06. Diffuse Lighting/DiffuseLighting/DiffuseLighting.vcxproj" Id="8a41ad1c-f9c9-4e1b-8a95-2b32c0bb9454" />
+    <Project Path="06. Diffuse Lighting/DiffuseLighting.vcxproj" Id="8a41ad1c-f9c9-4e1b-8a95-2b32c0bb9454" />
   </Folder>
 </Solution>

@@ -29,7 +29,7 @@ The following changes have been done. This is just a running list, and more is p
 * Functions have been converted to trailing return type syntax.
 * Various constants have been made `constexpr`.
 * Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
-* The two-phase initialization pattern will be removed with a combination of `std::optional` and making constructors do proper initialization.
+* The two-phase initialization pattern will be removed with a combination of `std::optional` and making constructors do proper initialization. This is not yet done and is reliant on a few other changes first (like making the destructors actually tear down the object).
 * Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
 * The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.
 * Converted code to use _Almost Always Auto_ idiom.

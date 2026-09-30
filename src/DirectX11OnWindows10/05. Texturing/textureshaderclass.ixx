@@ -1,6 +1,5 @@
-
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: textureshaderclass.h
+// Filename: textureshaderclass.ixx
 ////////////////////////////////////////////////////////////////////////////////
 export module demo:textureshaderclass;
 import std;
@@ -25,7 +24,7 @@ public:
 		auto vsFilename = std::wstring{L"texture.vs.hlsl"};
 		auto psFilename = std::wstring{L"texture.ps.hlsl"};
 		// Initialize the vertex and pixel shaders.
-		if (!InitializeShader(device, hwnd, vsFilename, psFilename))
+		if (not InitializeShader(device, hwnd, vsFilename, psFilename))
 			return false;
 
 		return true;

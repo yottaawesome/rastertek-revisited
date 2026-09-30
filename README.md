@@ -1,4 +1,4 @@
-# Rastertek DirectX 11, Revisited
+# Rastertek's DirectX 11 Tutorials, Revisited
 
 ## Introduction
 

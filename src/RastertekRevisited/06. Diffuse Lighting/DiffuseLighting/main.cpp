@@ -11,26 +11,15 @@
 import win32;
 import demo;
 
-int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
+auto WinMain(HINSTANCE, HINSTANCE, PSTR, int) -> int
 {
-	SystemClass* System;
-	bool result;
-	
-	
 	// Create the system object.
-	System = new SystemClass;
-
+	auto System = SystemClass{};
 	// Initialize and run the system object.
-	result = System->Initialize();
-	if(result)
-	{
-		System->Run();
-	}
-
+	if (System.Initialize())
+		System.Run();
 	// Shutdown and release the system object.
-	System->Shutdown();
-	delete System;
-	System = 0;
+	System.Shutdown();
 
 	return 0;
 }

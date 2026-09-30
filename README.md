@@ -34,4 +34,4 @@ The following changes have been done. This is just a running list, and more is p
 * The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.
 * Converted code to use _Almost Always Auto_ idiom.
 * The idiosyncratic use of `return` statements at the end of void functions has been removed.
-* Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors taht do nothing other than default initialise class members.
+* Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors that do nothing other than default initialise class members.

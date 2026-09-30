@@ -20,9 +20,10 @@ public:
 	/////////////
 	static inline SystemClass* ApplicationHandle = nullptr;
 
-	SystemClass() = default;
-
-	SystemClass(const SystemClass&) = default;
+	~SystemClass()
+	{
+		Shutdown();
+	}
 
 	auto Initialize() -> bool
 	{

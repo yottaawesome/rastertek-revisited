@@ -19,6 +19,7 @@ The first five tutorials (sans the first setting up one) from this series have b
 * [04. Buffers, Shaders, and HLSL](<src/DirectX11OnWindows10/04. Buffers, Shaders, and HLSL>)
 * [05. Texturing](<src/DirectX11OnWindows10/05. Texturing>)
 * [06. Diffuse Lighting](<src/DirectX11OnWindows10/06. Diffuse Lighting>)
+* [07. 3D Model Rendering](<src/DirectX11OnWindows10/07. 3D Model Rendering>)
 
 ## Changes
 

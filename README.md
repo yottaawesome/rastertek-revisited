@@ -34,6 +34,7 @@ The following changes have been done. This is just a running list, and more is p
 * Various constants have been made `constexpr`.
 * The top-of-function variable declaration style has been removed, with variables now moved to where they're first used in function bodies.
 * Certain raw C arrays that have their length tracked for function argument passing have been replaced with `std::array`.
+* Simple structs (e.g. `WNDCLASSEX`) are now initialised with designated initialisation.
 * Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
 * Destructors actually tear down objects.
 * Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).

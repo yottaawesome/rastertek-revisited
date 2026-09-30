@@ -24,7 +24,7 @@ The first five tutorials (sans the first setting up one) from this series have b
 
 The following changes have been done. This is just a running list, and more is planned.
 
-* Converted the code to inline C++20 modules. The traditional .h/.cpp distinction is gone, this reduces the total files, LoC and improves code locality. There is one module `demo`, which exports partitions, and each partition is named after the `.h`/`.cpp` file pair it replaces.
+* Converted the code to inline C++20 modules. The traditional `.h`/`.cpp` distinction is gone, this reduces the total files, LoC and improves code locality. There is one module `demo`, which exports partitions, and each partition is named after the `.h`/`.cpp` file pair it replaces.
 * Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`. More work remains to be done here.
 * Functions have been converted to trailing return type syntax.
 * Various constants have been made `constexpr`.

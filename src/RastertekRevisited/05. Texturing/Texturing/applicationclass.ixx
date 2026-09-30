@@ -6,7 +6,6 @@ import win32;
 import :d3dclass;
 import :cameraclass;
 import :modelclass;
-import :colorshaderclass;
 import :textureshaderclass;
 
 /////////////

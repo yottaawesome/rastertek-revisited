@@ -21,9 +21,6 @@
     <ClCompile Include="cameraclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="colorshaderclass.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="d3dclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -53,8 +50,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="color.ps.hlsl" />
-    <None Include="color.vs.hlsl" />
     <None Include="texture.ps.hlsl" />
     <None Include="texture.vs.hlsl" />
   </ItemGroup>

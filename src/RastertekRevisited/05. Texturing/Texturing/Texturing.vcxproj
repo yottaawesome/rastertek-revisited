@@ -151,7 +151,6 @@
   <ItemGroup>
     <ClCompile Include="applicationclass.ixx" />
     <ClCompile Include="cameraclass.ixx" />
-    <ClCompile Include="colorshaderclass.ixx" />
     <ClCompile Include="d3dclass.ixx" />
     <ClCompile Include="demo.ixx" />
     <ClCompile Include="inputclass.ixx" />
@@ -161,14 +160,6 @@
     <ClCompile Include="textureclass.ixx" />
     <ClCompile Include="textureshaderclass.ixx" />
     <ClCompile Include="win32.ixx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="color.ps.hlsl">
-      <FileType>Document</FileType>
-    </None>
-    <None Include="color.vs.hlsl">
-      <FileType>Document</FileType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="texture.ps.hlsl">

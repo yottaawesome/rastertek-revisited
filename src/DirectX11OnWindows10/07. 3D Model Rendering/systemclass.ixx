@@ -49,31 +49,21 @@ public:
 	void Run()
 	{
 		auto msg = MSG{};
-		auto done = false;
-		auto result = false;
-
 		// Loop until there is a quit message from the window or the user.
-		while (not done)
+		while (true)
 		{
 			// Handle the windows messages.
 			if (PeekMessageW(&msg, nullptr, 0, 0, PM::Remove))
 			{
-				TranslateMessage(&msg);
+				TranslateMessage(&msg),
 				DispatchMessageW(&msg);
 			}
 
 			// If windows signals to end the application then exit out.
 			if (msg.message == WM::Quit)
-			{
-				done = true;
-			}
-			else
-			{
-				// Otherwise do the frame processing.
-				result = Frame();
-				if (not result)
-					done = true;
-			}
+				break;
+			if (not Frame()) // Otherwise do the frame processing.
+				break;
 		}
 	}
 
@@ -111,7 +101,6 @@ private:
 		// Check if the user pressed escape and wants to exit the application.
 		if (m_Input.IsKeyDown(VK::Escape))
 			return false;
-
 		// Do the frame processing for the application class object.
 		if (not m_Application.Frame())
 			return false;

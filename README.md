@@ -6,7 +6,9 @@ Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are 
 
 ## Status
 
-The first five tutorials (sans the first setting up one) from the _DirectX 11 on Windows 10_ have been updated.
+### _DirectX 11 on Windows 10
+
+The first five tutorials (sans the first setting up one) from this series have been updated.
 
 * [02. Creating a Framework and Window](<src/DirectX11OnWindows10/02. Creating a Framework and Window>)
 * [03. Initializing DirectX 11](<src/DirectX11OnWindows10/03. Initializing DirectX 11>)

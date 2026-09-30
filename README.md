@@ -26,8 +26,11 @@ The first five tutorials (sans the first setting up one) from this series have b
 The following changes have been done. This is just a running list, and more is planned.
 
 * Converted the code to inline C++20 modules. The traditional `.h`/`.cpp` distinction is gone, this reduces the total files, LoC and improves code locality. There is one module `demo`, which exports partitions, and each partition is named after the `.h`/`.cpp` file pair it replaces.
-* Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`.
+* Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`. This also significantly simplifies much of the initialisation and teardown logic.
+* Simplified the main message loop.
 * Functions have been converted to trailing return type syntax.
+* `Input::Initialize()` has been removed. All it did was zero out a member array, which can be done with a simple inline braced initialiser.
+* Use of the `ZeroMemory` macro have been removed, with braced initialisation replacing it.
 * Various constants have been made `constexpr`.
 * The top-of-function variable declaration style has been removed, with variables now moved to where they're first used in function bodies.
 * Certain raw C arrays that have their length tracked for function argument passing have been replaced with `std::array`.

@@ -26,15 +26,15 @@ The first five tutorials (sans the first setting up one) from this series have b
 The following changes have been done. This is just a running list, and more is planned.
 
 * Converted the code to inline C++20 modules. The traditional `.h`/`.cpp` distinction is gone, this reduces the total files, LoC and improves code locality. There is one module `demo`, which exports partitions, and each partition is named after the `.h`/`.cpp` file pair it replaces.
-* Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`. More work remains to be done here.
+* Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`.
 * Functions have been converted to trailing return type syntax.
 * Various constants have been made `constexpr`.
 * The top-of-function variable declaration style has been removed, with variables now moved to where they're first used in function bodies.
 * Certain raw C arrays that have their length tracked for function argument passing have been replaced with `std::array`.
 * Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
-* The two-phase initialisation pattern will be removed with a combination of `std::optional` and making constructors do proper initialisation. This is not yet done and is reliant on a few other changes first (like making the destructors actually tear down the object).
+* Destructors actually tear down objects.
 * Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
 * The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.
 * Converted code to use _Almost Always Auto_ idiom.
 * The idiosyncratic use of `return` statements at the end of void functions has been removed.
-* Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors that do nothing other than default initialise class members.
+* Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors that do nothing other than default initialise class members. At this point, I'm undecided whether to keep the two-phase construction cycle or remove it, but if I do remove it, I will move the initialisation logic into the default constructor.

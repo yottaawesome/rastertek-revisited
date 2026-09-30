@@ -12,7 +12,7 @@ You need Visual Studio 2026 with the _Desktop development with C++_ and _Game de
 
 ### DirectX 11 on Windows 10
 
-The first five tutorials (sans the first setting up one) from this series have been updated.
+The first tutorials from this series have been updated (I've excluded the first tutorial since it's a setting up guide).
 
 * [02. Creating a Framework and Window](<src/DirectX11OnWindows10/02. Creating a Framework and Window>)
 * [03. Initializing DirectX 11](<src/DirectX11OnWindows10/03. Initializing DirectX 11>)

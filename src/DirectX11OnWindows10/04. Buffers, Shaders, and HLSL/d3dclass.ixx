@@ -11,6 +11,11 @@ import win32;
 class D3DClass
 {
 public:
+	~D3DClass()
+	{
+		Shutdown();
+	}
+
     auto Initialize(
 		int screenWidth, 
 		int screenHeight, 
@@ -435,9 +440,9 @@ public:
     }
 
 private:
-    bool m_vsync_enabled;
-    int m_videoCardMemory;
-    char m_videoCardDescription[128];
+    bool m_vsync_enabled = false;
+    int m_videoCardMemory = 0;
+    char m_videoCardDescription[128] = {};
     IDXGISwapChain* m_swapChain = nullptr;
     ID3D11Device* m_device = nullptr;
     ID3D11DeviceContext* m_deviceContext = nullptr;

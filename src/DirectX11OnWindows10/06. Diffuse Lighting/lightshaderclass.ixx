@@ -26,6 +26,11 @@ private:
 	};
 
 public:
+	~LightShaderClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device, HWND hwnd) -> bool
 	{
 		// Set the filename of the vertex shader.

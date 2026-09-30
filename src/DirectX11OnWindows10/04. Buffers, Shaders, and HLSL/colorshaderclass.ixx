@@ -20,6 +20,11 @@ private:
 	};
 
 public:
+	~ColorShaderClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device, HWND hwnd) -> bool
 	{
 		auto vsFilename = std::wstring{L"color.vs.hlsl"};

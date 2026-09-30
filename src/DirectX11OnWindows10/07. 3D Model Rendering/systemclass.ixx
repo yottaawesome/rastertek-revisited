@@ -25,21 +25,13 @@ public:
 	auto Initialize() -> bool
 	{
 		// Initialize the width and height of the screen to zero before sending the variables into the function.
+		// Initialize the windows api.
 		auto screenWidth = 0;
 		auto screenHeight = 0;
-
-		// Initialize the windows api.
 		InitializeWindows(screenWidth, screenHeight);
 
-		// Create and initialize the input object.  This object will be used to handle reading the keyboard input from the user.
-		m_Input = new InputClass;
-
-		m_Input->Initialize();
-
 		// Create and initialize the application class object.  This object will handle rendering all the graphics for this application.
-		m_Application = new ApplicationClass;
-
-		if (!m_Application->Initialize(screenWidth, screenHeight, m_hwnd))
+		if (not m_Application.Initialize(screenWidth, screenHeight, m_hwnd))
 			return false;
 
 		return true;
@@ -48,19 +40,7 @@ public:
 	void Shutdown()
 	{
 		// Release the application class object.
-		if (m_Application)
-		{
-			m_Application->Shutdown();
-			delete m_Application;
-			m_Application = 0;
-		}
-
-		// Release the input class object.
-		if (m_Input)
-		{
-			delete m_Input;
-			m_Input = 0;
-		}
+		m_Application.Shutdown();
 
 		// Shutdown the window.
 		ShutdownWindows();
@@ -105,7 +85,7 @@ public:
 			case WM::KeyDown:
 			{
 				// If a key is pressed send it to the input object so it can record that state.
-				m_Input->KeyDown((unsigned int)wparam);
+				m_Input.KeyDown((unsigned int)wparam);
 				return 0;
 			}
 
@@ -113,7 +93,7 @@ public:
 			case WM::KeyUp:
 			{
 				// If a key is released then send it to the input object so it can unset the state for that key.
-				m_Input->KeyUp((unsigned int)wparam);
+				m_Input.KeyUp((unsigned int)wparam);
 				return 0;
 			}
 
@@ -129,11 +109,11 @@ private:
 	auto Frame() -> bool
 	{
 		// Check if the user pressed escape and wants to exit the application.
-		if (m_Input->IsKeyDown(VK::Escape))
+		if (m_Input.IsKeyDown(VK::Escape))
 			return false;
 
 		// Do the frame processing for the application class object.
-		if (not m_Application->Frame())
+		if (not m_Application.Frame())
 			return false;
 
 		return true;
@@ -284,6 +264,6 @@ private:
 	HINSTANCE m_hinstance = nullptr;
 	HWND m_hwnd = nullptr;
 
-	InputClass* m_Input = nullptr;
-	ApplicationClass* m_Application = nullptr;
+	InputClass m_Input;
+	ApplicationClass m_Application;
 };

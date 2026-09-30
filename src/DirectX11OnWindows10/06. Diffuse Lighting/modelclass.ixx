@@ -20,6 +20,11 @@ private:
 	};
 
 public:
+	~ModelClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& textureFilename) -> bool
 	{
 		// Initialize the vertex and index buffers.
@@ -57,7 +62,7 @@ public:
 
 	auto GetTexture() -> ID3D11ShaderResourceView*
 	{
-		return m_Texture->GetTexture();
+		return m_Texture.GetTexture();
 	}
 
 private:
@@ -178,10 +183,7 @@ private:
 	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Create and initialize the texture object.
-		m_Texture = new TextureClass;
-
-		auto result = m_Texture->Initialize(device, deviceContext, filename);
-		if (not result)
+		if (not m_Texture.Initialize(device, deviceContext, filename))
 			return false;
 
 		return true;
@@ -190,12 +192,7 @@ private:
 	void ReleaseTexture()
 	{
 		// Release the texture object.
-		if (m_Texture)
-		{
-			m_Texture->Shutdown();
-			delete m_Texture;
-			m_Texture = 0;
-		}
+		m_Texture.Shutdown();
 	}
 
 private:
@@ -203,5 +200,5 @@ private:
 	ID3D11Buffer* m_indexBuffer = nullptr;
 	int m_vertexCount = 0; 
 	int m_indexCount = 0;
-	TextureClass* m_Texture = nullptr;
+	TextureClass m_Texture;
 };

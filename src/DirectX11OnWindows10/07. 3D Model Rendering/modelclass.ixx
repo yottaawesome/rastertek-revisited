@@ -79,9 +79,9 @@ public:
 		return m_indexCount;
 	}
 
-	auto GetTexture() noexcept -> ID3D11ShaderResourceView*
+	auto GetTexture() const noexcept -> ID3D11ShaderResourceView*
 	{
-		return m_Texture ? m_Texture->GetTexture() : nullptr;
+		return m_Texture.GetTexture();
 	}
 
 private:
@@ -185,9 +185,7 @@ private:
 	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Create and initialize the texture object.
-		m_Texture.emplace();
-
-		if (not m_Texture->Initialize(device, deviceContext, filename))
+		if (not m_Texture.Initialize(device, deviceContext, filename))
 			return false;
 
 		return true;
@@ -196,7 +194,7 @@ private:
 	void ReleaseTexture()
 	{
 		// Release the texture object.
-		m_Texture.reset();
+		m_Texture.Shutdown();
 	}
 
 	auto LoadModel(const std::string& filename) -> bool
@@ -221,7 +219,7 @@ private:
 		m_indexCount = m_vertexCount;
 
 		// Create the model using the vertex count that was read in.
-		m_model = std::make_unique<ModelType[]>(m_vertexCount);
+		m_model.resize(m_vertexCount);
 
 		// Read up to the beginning of the data.
 		fin.get(input);
@@ -246,7 +244,7 @@ private:
 
 	void ReleaseModel()
 	{
-		m_model.reset();
+		m_model.clear();
 	}
 
 private:
@@ -254,6 +252,6 @@ private:
 	ID3D11Buffer* m_indexBuffer = nullptr;
 	int m_vertexCount = 0;
 	int m_indexCount = 0;
-	std::optional<TextureClass> m_Texture;
-	std::unique_ptr<ModelType[]> m_model;
+	TextureClass m_Texture;
+	std::vector<ModelType> m_model;
 };

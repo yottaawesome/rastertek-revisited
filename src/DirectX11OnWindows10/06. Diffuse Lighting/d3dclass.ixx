@@ -11,6 +11,11 @@ import win32;
 class D3DClass
 {
 public:
+	~D3DClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear) -> bool
 	{
 		// Store the vsync setting.

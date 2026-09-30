@@ -22,6 +22,11 @@ private:
 	};
 
 public:
+	~TextureClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Load the targa image data into memory.

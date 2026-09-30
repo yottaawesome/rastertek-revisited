@@ -19,6 +19,11 @@ private:
 	};
 
 public:
+	~ModelClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device) -> bool
 	{
 		// Initialize the vertex and index buffers.
@@ -41,7 +46,7 @@ public:
 		RenderBuffers(deviceContext);
 	}
 
-	auto GetIndexCount() -> int
+	auto GetIndexCount() const noexcept -> int
 	{
 		return m_indexCount;
 	}

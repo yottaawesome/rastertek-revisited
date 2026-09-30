@@ -11,6 +11,11 @@ import win32;
 class D3DClass
 {
 public:
+	~D3DClass()
+	{
+		Shutdown();
+	}
+
     auto Initialize(
 		int screenWidth, 
 		int screenHeight, 
@@ -422,6 +427,7 @@ public:
         // Bind the render target view and depth stencil buffer to the output render pipeline.
         m_deviceContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
     }
+
     void ResetViewport()
     {
         // Set the viewport.

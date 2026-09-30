@@ -28,8 +28,8 @@ The following changes have been done. This is just a running list, and more is p
 * Various constants have been made `constexpr`.
 * Replaced various raw C string arrays with `std::string`/`std::wstring` and their related types.
 * The two-phase initialization pattern will be removed with a combination of `std::optional` and making constructors do proper initialization.
-* Vertex and pixel shader files have been given the `.hlsl` extension to allow propert syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
+* Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
 * The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.
 * Converted code to use _Almost Always Auto_ idiom.
 * The idiosyncratic use of `return` statements at the end of void functions has been removed.
-* Initialization of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors.
+* Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors.

@@ -13,21 +13,21 @@ class D3DClass
 public:
 	auto Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear) -> bool
 	{
-		float fieldOfView, screenAspect;
+		
 
 		// Store the vsync setting.
 		m_vsync_enabled = vsync;
 
 		// Create a DirectX graphics interface factory.
-		IDXGIFactory* factory;
-		HRESULT result = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
+		auto factory = static_cast<IDXGIFactory*>(nullptr);
+		auto result = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 		if (Failed(result))
 		{
 			return false;
 		}
 
 		// Use the factory to create an adapter for the primary graphics interface (video card).
-		IDXGIAdapter* adapter;
+		auto adapter = static_cast<IDXGIAdapter*>(nullptr);
 		result = factory->EnumAdapters(0, &adapter);
 		if (Failed(result))
 		{
@@ -35,7 +35,7 @@ public:
 		}
 
 		// Enumerate the primary adapter output (monitor).
-		IDXGIOutput* adapterOutput;
+		auto adapterOutput = static_cast<IDXGIOutput*>(nullptr);
 		result = adapter->EnumOutputs(0, &adapterOutput);
 		if (Failed(result))
 		{
@@ -43,7 +43,7 @@ public:
 		}
 
 		// Get the number of modes that fit the DXGI_FORMAT_R8G8B8A8_UNORM display format for the adapter output (monitor).
-		unsigned int numModes;
+		auto numModes = 0u;
 		result = adapterOutput->GetDisplayModeList(DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM, DxgiEnumModes::Interlaced, &numModes, nullptr);
 		if (Failed(result))
 		{
@@ -66,8 +66,8 @@ public:
 
 		// Now go through all the display modes and find the one that matches the screen width and height.
 		// When a match is found store the numerator and denominator of the refresh rate for that monitor.
-		unsigned int numerator;
-		unsigned int denominator;
+		auto numerator = 0u;
+		auto denominator = 0u;
 		for (auto i = 0u; i < numModes; i++)
 		{
 			if (displayModeList[i].Width == (unsigned int)screenWidth)
@@ -81,7 +81,7 @@ public:
 		}
 
 		// Get the adapter (video card) description.
-		DXGI_ADAPTER_DESC adapterDesc;
+		auto adapterDesc = DXGI_ADAPTER_DESC{};
 		result = adapter->GetDesc(&adapterDesc);
 		if (Failed(result))
 		{
@@ -92,7 +92,7 @@ public:
 		m_videoCardMemory = (int)(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
 
 		// Convert the name of the video card to a character array and store it.
-		unsigned long long stringLength;
+		auto stringLength = 0ull;
 		auto error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
 		if (error != 0)
 		{
@@ -224,28 +224,29 @@ public:
 		}
 
 		// Initialize the description of the stencil state.
-		D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
-
-		// Set up the description of the stencil state.
-		depthStencilDesc.DepthEnable = true;
-		depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
-
-		depthStencilDesc.StencilEnable = true;
-		depthStencilDesc.StencilReadMask = 0xFF;
-		depthStencilDesc.StencilWriteMask = 0xFF;
-
-		// Stencil operations if pixel is front-facing.
-		depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-		depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
-		depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-		depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
-		// Stencil operations if pixel is back-facing.
-		depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-		depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
-		depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-		depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+		auto depthStencilDesc = D3D11_DEPTH_STENCIL_DESC{
+			// Set up the description of the stencil state.
+			.DepthEnable = true,
+			.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL,
+			.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS,
+			.StencilEnable = true,
+			.StencilReadMask = 0xFF,
+			.StencilWriteMask = 0xFF,
+			// Stencil operations if pixel is front-facing.
+			.FrontFace = {
+				.StencilFailOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_KEEP,
+				.StencilDepthFailOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_INCR,
+				.StencilPassOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_KEEP,
+				.StencilFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_ALWAYS
+			},
+			// Stencil operations if pixel is back-facing.
+			.BackFace = {
+				.StencilFailOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_KEEP,
+				.StencilDepthFailOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_DECR,
+				.StencilPassOp = D3D11_STENCIL_OP::D3D11_STENCIL_OP_KEEP,
+				.StencilFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_ALWAYS
+			}
+		};
 
 		// Create the depth stencil state.
 		result = m_device->CreateDepthStencilState(&depthStencilDesc, &m_depthStencilState);
@@ -258,12 +259,14 @@ public:
 		m_deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
 
 		// Initialize the depth stencil view.
-		D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc = {};
-
 		// Set up the depth stencil view description.
-		depthStencilViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-		depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-		depthStencilViewDesc.Texture2D.MipSlice = 0;
+		auto depthStencilViewDesc = D3D11_DEPTH_STENCIL_VIEW_DESC{
+			.Format = DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT,
+			.ViewDimension = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2D,
+			.Texture2D = {
+				.MipSlice = 0
+			}
+		};
 
 		// Create the depth stencil view.
 		result = m_device->CreateDepthStencilView(m_depthStencilBuffer, &depthStencilViewDesc, &m_depthStencilView);
@@ -276,17 +279,18 @@ public:
 		m_deviceContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
 
 		// Setup the raster description which will determine how and what polygons will be drawn.
-		D3D11_RASTERIZER_DESC rasterDesc;
-		rasterDesc.AntialiasedLineEnable = false;
-		rasterDesc.CullMode = D3D11_CULL_BACK;
-		rasterDesc.DepthBias = 0;
-		rasterDesc.DepthBiasClamp = 0.0f;
-		rasterDesc.DepthClipEnable = true;
-		rasterDesc.FillMode = D3D11_FILL_SOLID;
-		rasterDesc.FrontCounterClockwise = false;
-		rasterDesc.MultisampleEnable = false;
-		rasterDesc.ScissorEnable = false;
-		rasterDesc.SlopeScaledDepthBias = 0.0f;
+		auto rasterDesc = D3D11_RASTERIZER_DESC{
+			.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID,
+			.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK,
+			.FrontCounterClockwise = false,
+			.DepthBias = 0,
+			.DepthBiasClamp = 0.0f,
+			.SlopeScaledDepthBias = 0.0f,
+			.DepthClipEnable = true,
+			.ScissorEnable = false,
+			.MultisampleEnable = false,
+			.AntialiasedLineEnable = false,
+		};
 
 		// Create the rasterizer state from the description we just filled out.
 		result = m_device->CreateRasterizerState(&rasterDesc, &m_rasterState);
@@ -310,8 +314,8 @@ public:
 		m_deviceContext->RSSetViewports(1, &m_viewport);
 
 		// Setup the projection matrix.
-		fieldOfView = 3.141592654f / 4.0f;
-		screenAspect = (float)screenWidth / (float)screenHeight;
+		auto fieldOfView = 3.141592654f / 4.0f;
+		auto screenAspect = (float)screenWidth / (float)screenHeight;
 
 		// Create the projection matrix for 3D rendering.
 		m_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
@@ -385,10 +389,10 @@ public:
 	void BeginScene(float red, float green, float blue, float alpha)
 	{
 		// Setup the color to clear the buffer to.
-		float color[4]{red, green, blue, alpha};
+		auto color = std::array{red, green, blue, alpha};
 
 		// Clear the back buffer.
-		m_deviceContext->ClearRenderTargetView(m_renderTargetView, color);
+		m_deviceContext->ClearRenderTargetView(m_renderTargetView, color.data());
 
 		// Clear the depth buffer.
 		m_deviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0f, 0);

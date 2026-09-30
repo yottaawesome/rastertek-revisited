@@ -28,7 +28,7 @@ The following changes have been done. This is just a running list, and more is p
 * Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`. More work remains to be done here.
 * Functions have been converted to trailing return type syntax.
 * Various constants have been made `constexpr`.
-* Replaced various raw C string arrays with `std::string`/`std::wstring` and their related types.
+* Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
 * The two-phase initialization pattern will be removed with a combination of `std::optional` and making constructors do proper initialization.
 * Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
 * The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.

@@ -18,4 +18,7 @@
   <Folder Name="/06. Diffuse Lighting/">
     <Project Path="06. Diffuse Lighting/DiffuseLighting.vcxproj" Id="8a41ad1c-f9c9-4e1b-8a95-2b32c0bb9454" />
   </Folder>
+  <Folder Name="/07. 3D Model Rendering/">
+    <Project Path="07. 3D Model Rendering/3DModelRendering.vcxproj" Id="67e118ea-8605-41d1-a924-57aabbd9004c" />
+  </Folder>
 </Solution>

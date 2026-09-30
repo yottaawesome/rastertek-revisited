@@ -117,11 +117,11 @@ private:
 		m_Camera->Render();
 
 		// Get the world, view, and projection matrices from the camera and d3d objects.
-		DirectX::XMMATRIX worldMatrix;
+		auto worldMatrix = DirectX::XMMATRIX{};
 		m_Direct3D->GetWorldMatrix(worldMatrix);
-		DirectX::XMMATRIX viewMatrix;
+		auto viewMatrix = DirectX::XMMATRIX{};
 		m_Camera->GetViewMatrix(viewMatrix);
-		DirectX::XMMATRIX projectionMatrix;
+		auto projectionMatrix = DirectX::XMMATRIX{};
 		m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
 		// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.

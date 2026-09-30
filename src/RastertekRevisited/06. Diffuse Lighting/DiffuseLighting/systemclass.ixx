@@ -59,8 +59,6 @@ public:
 
 		// Shutdown the window.
 		ShutdownWindows();
-
-		return;
 	}
 
 	void Run()

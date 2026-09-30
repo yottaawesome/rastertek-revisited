@@ -40,7 +40,7 @@ public:
 		return true;
 	}
 
-	auto Shutdown() -> void
+	void Shutdown()
 	{
 		// Shutdown the vertex and pixel shaders as well as the related objects.
 		ShutdownShader();

@@ -19,6 +19,7 @@ The first five tutorials (sans the first setting up one) from this series have b
 * [04. Buffers, Shaders, and HLSL](<src/DirectX11OnWindows10/04. Buffers, Shaders, and HLSL>)
 * [05. Texturing](<src/DirectX11OnWindows10/05. Texturing>)
 * [06. Diffuse Lighting](<src/DirectX11OnWindows10/06. Diffuse Lighting>)
+* [07. 3D Model Rendering](<src/DirectX11OnWindows10/07. 3D Model Rendering>)
 
 ## Changes
 
@@ -28,6 +29,7 @@ The following changes have been done. This is just a running list, and more is p
 * Unnecessary use of dynamic memory allocations (e.g. in `main()`) have been removed in favour of either scoped lifecycles or managed containers like `std::vector`. More work remains to be done here.
 * Functions have been converted to trailing return type syntax.
 * Various constants have been made `constexpr`.
+* The top-of-function variable declaration style has been removed, with variables now moved to where they're first used in function bodies.
 * Certain raw C arrays that have their length tracked for function argument passing have been replaced with `std::array`.
 * Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
 * The two-phase initialisation pattern will be removed with a combination of `std::optional` and making constructors do proper initialisation. This is not yet done and is reliant on a few other changes first (like making the destructors actually tear down the object).

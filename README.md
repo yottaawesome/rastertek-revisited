@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are still an extremely useful resource for learning DirectX 11, even if they are a little dated now. The aim of this repo is to revisit the source code from the tutorials and modernise it. This does not supplant the original tutorials and you still need to follow them to understand what's going on.
+Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are still an extremely useful resource for learning DirectX 11, even if they are a little dated now. The aim of this repo is to revisit the source code from the tutorials and modernise it. This does not supplant the original tutorials and you still need to follow them to understand what's going on (seriously, those tutorials are great).
 
 ## Building
 

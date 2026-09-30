@@ -8,6 +8,12 @@ Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are 
 
 The first five tutorials (sans the first setting up one) from the _DirectX 11 on Windows 10_ have been updated.
 
+* [02. Creating a Framework and Window](<src/DirectX11OnWindows10/02. Creating a Framework and Window>)
+* [03. Initializing DirectX 11](<src/DirectX11OnWindows10/03. Initializing DirectX 11>)
+* [04. Buffers, Shaders, and HLSL](<src/DirectX11OnWindows10/04. Buffers, Shaders, and HLSL>)
+* [05. Texturing](<src/DirectX11OnWindows10/05. Texturing>)
+* [06. Diffuse Lighting](<src/DirectX11OnWindows10/06. Diffuse Lighting>)
+
 ## Building
 
 You need Visual Studio 2026 with the _Desktop development with C++_ and _Game development with C++_ workloads installed. I work with the preview version of MSVC (to pick up issues early), so you'll also need the _MSVC Build Tools for x64/x86 (Preview)_ Visual Studio component installed, but this is not strictly necessary: you can disable the use of the preview tools in the individual project settings.

@@ -6,7 +6,7 @@ Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are 
 
 ## Status
 
-### _DirectX 11 on Windows 10
+### DirectX 11 on Windows 10
 
 The first five tutorials (sans the first setting up one) from this series have been updated.
 

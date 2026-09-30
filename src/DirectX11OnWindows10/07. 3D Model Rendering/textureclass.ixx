@@ -22,6 +22,11 @@ private:
 	};
 
 public:
+	~TextureClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Load the targa image data into memory.
@@ -98,21 +103,19 @@ public:
 
 		// Release the targa data.
 		m_targaData.clear();
-
-		return;
 	}
 
-	auto GetTexture() -> ID3D11ShaderResourceView*
+	auto GetTexture() const noexcept -> ID3D11ShaderResourceView*
 	{
 		return m_textureView;
 	}
 
-	auto GetWidth() -> int
+	auto GetWidth() const noexcept -> int
 	{
 		return m_width;
 	}
 
-	auto GetHeight() -> int
+	auto GetHeight() const noexcept -> int
 	{
 		return m_height;
 	}

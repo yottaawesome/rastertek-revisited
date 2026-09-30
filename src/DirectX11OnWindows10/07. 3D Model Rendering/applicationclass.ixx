@@ -24,6 +24,11 @@ constexpr float SCREEN_NEAR = 0.3f;
 class ApplicationClass
 {
 public:
+	~ApplicationClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(int screenWidth, int screenHeight, HWND hwnd) -> bool
 	{
 		// Create and initialize the Direct3D object.

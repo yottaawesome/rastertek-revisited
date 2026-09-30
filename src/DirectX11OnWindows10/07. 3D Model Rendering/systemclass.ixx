@@ -17,6 +17,11 @@ public:
 	/////////////
 	static inline auto ApplicationHandle = static_cast<SystemClass*>(nullptr);
 
+	~SystemClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize() -> bool
 	{
 		// Initialize the width and height of the screen to zero before sending the variables into the function.
@@ -226,6 +231,9 @@ private:
 
 	void ShutdownWindows()
 	{
+		if (not m_hwnd)
+			return;
+
 		// Show the mouse cursor.
 		ShowCursor(true);
 

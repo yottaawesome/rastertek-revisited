@@ -29,6 +29,11 @@ private:
 	};
 
 public:
+	~ModelClass()
+	{
+		Shutdown();
+	}
+
 	auto Initialize(
 		ID3D11Device* device, 
 		ID3D11DeviceContext* deviceContext, 
@@ -74,9 +79,9 @@ public:
 		return m_indexCount;
 	}
 
-	auto GetTexture() const noexcept -> ID3D11ShaderResourceView*
+	auto GetTexture() noexcept -> ID3D11ShaderResourceView*
 	{
-		return m_Texture->GetTexture();
+		return m_Texture ? m_Texture->GetTexture() : nullptr;
 	}
 
 private:
@@ -150,14 +155,14 @@ private:
 		if (m_indexBuffer)
 		{
 			m_indexBuffer->Release();
-			m_indexBuffer = 0;
+			m_indexBuffer = nullptr;
 		}
 
 		// Release the vertex buffer.
 		if (m_vertexBuffer)
 		{
 			m_vertexBuffer->Release();
-			m_vertexBuffer = 0;
+			m_vertexBuffer = nullptr;
 		}
 	}
 
@@ -180,7 +185,7 @@ private:
 	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Create and initialize the texture object.
-		m_Texture = new TextureClass;
+		m_Texture.emplace();
 
 		if (not m_Texture->Initialize(device, deviceContext, filename))
 			return false;
@@ -191,12 +196,7 @@ private:
 	void ReleaseTexture()
 	{
 		// Release the texture object.
-		if (m_Texture)
-		{
-			m_Texture->Shutdown();
-			delete m_Texture;
-			m_Texture = 0;
-		}
+		m_Texture.reset();
 	}
 
 	auto LoadModel(const std::string& filename) -> bool
@@ -221,7 +221,7 @@ private:
 		m_indexCount = m_vertexCount;
 
 		// Create the model using the vertex count that was read in.
-		m_model = new ModelType[m_vertexCount];
+		m_model = std::make_unique<ModelType[]>(m_vertexCount);
 
 		// Read up to the beginning of the data.
 		fin.get(input);
@@ -246,11 +246,7 @@ private:
 
 	void ReleaseModel()
 	{
-		if (m_model)
-		{
-			delete[] m_model;
-			m_model = nullptr;
-		}
+		m_model.reset();
 	}
 
 private:
@@ -258,6 +254,6 @@ private:
 	ID3D11Buffer* m_indexBuffer = nullptr;
 	int m_vertexCount = 0;
 	int m_indexCount = 0;
-	TextureClass* m_Texture = nullptr;
-	ModelType* m_model = nullptr;
+	std::optional<TextureClass> m_Texture;
+	std::unique_ptr<ModelType[]> m_model;
 };

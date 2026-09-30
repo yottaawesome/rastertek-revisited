@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: modelclass.cpp
+// Filename: modelclass.ixx
 ////////////////////////////////////////////////////////////////////////////////
 export module demo:modelclass;
 import std;
@@ -37,18 +37,15 @@ public:
 	) -> bool
 	{
 		// Load in the model data.
-		auto result = LoadModel(modelFilename);
-		if (not result)
+		if (not LoadModel(modelFilename))
 			return false;
 
 		// Initialize the vertex and index buffers.
-		result = InitializeBuffers(device);
-		if (not result)
+		if (not InitializeBuffers(device))
 			return false;
 
 		// Load the texture for this model.
-		result = LoadTexture(device, deviceContext, textureFilename);
-		if (not result)
+		if (not LoadTexture(device, deviceContext, textureFilename))
 			return false;
 
 		return true;
@@ -185,8 +182,7 @@ private:
 		// Create and initialize the texture object.
 		m_Texture = new TextureClass;
 
-		auto result = m_Texture->Initialize(device, deviceContext, filename);
-		if (not result)
+		if (not m_Texture->Initialize(device, deviceContext, filename))
 			return false;
 
 		return true;
@@ -213,7 +209,7 @@ private:
 			return false;
 
 		// Read up to the value of vertex count.
-		char input;
+		auto input = char{};
 		fin.get(input);
 		while (input != ':')
 			fin.get(input);

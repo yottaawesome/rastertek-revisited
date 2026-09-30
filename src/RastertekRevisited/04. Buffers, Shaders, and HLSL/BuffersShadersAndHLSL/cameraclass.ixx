@@ -15,7 +15,6 @@ public:
 		m_positionZ = z;
 	}
 
-
 	void SetRotation(float x, float y, float z)
 	{
 		m_rotationX = x;
@@ -23,18 +22,15 @@ public:
 		m_rotationZ = z;
 	}
 
-
 	auto GetPosition() -> DirectX::XMFLOAT3
 	{
 		return DirectX::XMFLOAT3(m_positionX, m_positionY, m_positionZ);
 	}
 
-
 	auto GetRotation() -> DirectX::XMFLOAT3
 	{
 		return DirectX::XMFLOAT3(m_rotationX, m_rotationY, m_rotationZ);
 	}
-
 
 	void Render()
 	{

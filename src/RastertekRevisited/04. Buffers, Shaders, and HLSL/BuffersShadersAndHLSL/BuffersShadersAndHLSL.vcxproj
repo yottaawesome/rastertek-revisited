@@ -153,6 +153,7 @@
     <ClCompile Include="cameraclass.ixx" />
     <ClCompile Include="colorshaderclass.ixx" />
     <ClCompile Include="modelclass.ixx" />
+    <ClCompile Include="win32.ixx" />
     <None Include="color.ps.hlsl">
       <FileType>Document</FileType>
     </None>
@@ -161,7 +162,6 @@
     <ClCompile Include="inputclass.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="systemclass.ixx" />
-    <ClCompile Include="win32.ixx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="color.vs.hlsl" />

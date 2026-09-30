@@ -20,7 +20,7 @@ private:
 	};
 
 public:
-	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename) -> bool
+	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& textureFilename) -> bool
 	{
 		// Initialize the vertex and index buffers.
 		auto result = InitializeBuffers(device);
@@ -70,79 +70,74 @@ private:
 		m_indexCount = 3;
 
 		// Create the vertex array.
-		VertexType* vertices = new VertexType[m_vertexCount];
+		// Load the vertex array with data.
+		auto vertices = std::vector<VertexType>{
+			{
+				.position = DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f),  // Bottom left.
+				.texture = DirectX::XMFLOAT2(0.0f, 1.0f),
+				.normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f),
+			},
+			{
+				.position = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f),  // Top middle.
+				.texture = DirectX::XMFLOAT2(0.5f, 0.0f),
+				.normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f),
+			},
+			{
+				.position = DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f),  // Bottom right.
+				.texture = DirectX::XMFLOAT2(1.0f, 1.0f),
+				.normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f),
+			}
+		};
 
 		// Create the index array.
-		unsigned long* indices = new unsigned long[m_indexCount];
-
-		// Load the vertex array with data.
-		vertices[0].position = DirectX::XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-		vertices[0].texture = DirectX::XMFLOAT2(0.0f, 1.0f);
-		vertices[0].normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f);
-
-		vertices[1].position = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
-		vertices[1].texture = DirectX::XMFLOAT2(0.5f, 0.0f);
-		vertices[1].normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f);
-
-		vertices[2].position = DirectX::XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
-		vertices[2].texture = DirectX::XMFLOAT2(1.0f, 1.0f);
-		vertices[2].normal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f);
-
-		// Load the index array with data.
-		indices[0] = 0;  // Bottom left.
-		indices[1] = 1;  // Top middle.
-		indices[2] = 2;  // Bottom right.
+		auto indices = std::vector<unsigned long>{
+			0,  // Bottom left.
+			1,  // Top middle.
+			2   // Bottom right.
+		};
 
 		// Set up the description of the static vertex buffer.
-		D3D11_BUFFER_DESC vertexBufferDesc;
-		vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
-		vertexBufferDesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-		vertexBufferDesc.CPUAccessFlags = 0;
-		vertexBufferDesc.MiscFlags = 0;
-		vertexBufferDesc.StructureByteStride = 0;
+		auto vertexBufferDesc = D3D11_BUFFER_DESC{
+			.ByteWidth = static_cast<UINT>(sizeof(VertexType) * m_vertexCount),
+			.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT,
+			.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER,
+			.CPUAccessFlags = 0,
+			.MiscFlags = 0,
+			.StructureByteStride = 0
+		};
 
 		// Give the subresource structure a pointer to the vertex data.
-		D3D11_SUBRESOURCE_DATA vertexData;
-		vertexData.pSysMem = vertices;
-		vertexData.SysMemPitch = 0;
-		vertexData.SysMemSlicePitch = 0;
+		auto vertexData = D3D11_SUBRESOURCE_DATA{
+			.pSysMem = vertices.data(),
+			.SysMemPitch = 0,
+			.SysMemSlicePitch = 0
+		};
 
 		// Now create the vertex buffer.
-		HRESULT result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
+		auto result = device->CreateBuffer(&vertexBufferDesc, &vertexData, &m_vertexBuffer);
 		if (Failed(result))
-		{
 			return false;
-		}
 
 		// Set up the description of the static index buffer.
-		D3D11_BUFFER_DESC indexBufferDesc;
-		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		indexBufferDesc.ByteWidth = sizeof(unsigned long) * m_indexCount;
-		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		indexBufferDesc.CPUAccessFlags = 0;
-		indexBufferDesc.MiscFlags = 0;
-		indexBufferDesc.StructureByteStride = 0;
-
+		auto indexBufferDesc = D3D11_BUFFER_DESC{
+			.ByteWidth = static_cast<UINT>(sizeof(unsigned long) * m_indexCount),
+			.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT,
+			.BindFlags = D3D11_BIND_INDEX_BUFFER,
+			.CPUAccessFlags = 0,
+			.MiscFlags = 0,
+			.StructureByteStride = 0
+		};
 		// Give the subresource structure a pointer to the index data.
-		D3D11_SUBRESOURCE_DATA indexData;
-		indexData.pSysMem = indices;
-		indexData.SysMemPitch = 0;
-		indexData.SysMemSlicePitch = 0;
+		auto indexData = D3D11_SUBRESOURCE_DATA{
+			.pSysMem = indices.data(),
+			.SysMemPitch = 0,
+			.SysMemSlicePitch = 0
+		};
 
 		// Create the index buffer.
 		result = device->CreateBuffer(&indexBufferDesc, &indexData, &m_indexBuffer);
 		if (Failed(result))
-		{
 			return false;
-		}
-
-		// Release the arrays now that the vertex and index buffers have been created and loaded.
-		delete[] vertices;
-		vertices = 0;
-
-		delete[] indices;
-		indices = 0;
 
 		return true;
 	}
@@ -167,8 +162,8 @@ private:
 	void RenderBuffers(ID3D11DeviceContext* deviceContext)
 	{
 		// Set vertex buffer stride and offset.
-		unsigned int stride = sizeof(VertexType);
-		unsigned int offset = 0;
+		auto stride = static_cast<UINT>(sizeof(VertexType));
+		auto offset = 0u;
 
 		// Set the vertex buffer to active in the input assembler so it can be rendered.
 		deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
@@ -180,12 +175,12 @@ private:
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
 
-	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename) -> bool
+	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Create and initialize the texture object.
 		m_Texture = new TextureClass;
 
-		bool result = m_Texture->Initialize(device, deviceContext, filename);
+		auto result = m_Texture->Initialize(device, deviceContext, filename);
 		if (not result)
 			return false;
 

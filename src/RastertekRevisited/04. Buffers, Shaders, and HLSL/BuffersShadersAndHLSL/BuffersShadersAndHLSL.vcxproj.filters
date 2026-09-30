@@ -33,9 +33,6 @@
     <ClCompile Include="systemclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="win32.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="colorshaderclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -43,6 +40,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cameraclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win32.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

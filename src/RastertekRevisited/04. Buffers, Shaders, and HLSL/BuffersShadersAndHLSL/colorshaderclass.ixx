@@ -46,10 +46,8 @@ public:
 	) -> bool
 	{
 		// Set the shader parameters that it will use for rendering.
-		if (!SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix))
-		{
+		if (not SetShaderParameters(deviceContext, worldMatrix, viewMatrix, projectionMatrix))
 			return false;
-		}
 
 		// Now render the prepared buffers with the shader.
 		RenderShader(deviceContext, indexCount);
@@ -83,15 +81,10 @@ private:
 		{
 			// If the shader failed to compile it should have writen something to the error message.
 			if (errorMessage)
-			{
 				OutputShaderErrorMessage(errorMessage, hwnd, const_cast<wchar_t*>(vsFilename.data()));
-			}
 			// If there was  nothing in the error message then it simply could not find the shader file itself.
 			else
-			{
 				MessageBoxW(hwnd, vsFilename.c_str(), L"Missing Shader File", MB::Ok);
-			}
-
 			return false;
 		}
 
@@ -112,33 +105,22 @@ private:
 		{
 			// If the shader failed to compile it should have writen something to the error message.
 			if (errorMessage)
-			{
 				OutputShaderErrorMessage(errorMessage, hwnd, const_cast<wchar_t*>(psFilename.data()));
-			}
 			// If there was nothing in the error message then it simply could not find the file itself.
 			else
-			{
 				MessageBoxW(hwnd, psFilename.c_str(), L"Missing Shader File", MB::Ok);
-			}
-
 			return false;
 		}
-
 
 		// Create the vertex shader from the buffer.
 		result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), nullptr, &m_vertexShader);
 		if (Failed(result))
-		{
 			return false;
-		}
 
 		// Create the pixel shader from the buffer.
 		result = device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), nullptr, &m_pixelShader);
 		if (Failed(result))
-		{
 			return false;
-		}
-
 
 		// Create the vertex input layout description.
 		// This setup needs to match the VertexType stucture in the ModelClass and in the shader.
@@ -164,15 +146,18 @@ private:
 		};
 
 		// Get a count of the elements in the layout.
-		unsigned int numElements = static_cast<unsigned int>(polygonLayout.size());
+		auto numElements = static_cast<unsigned int>(polygonLayout.size());
 
 		// Create the vertex input layout.
-		result = device->CreateInputLayout(polygonLayout.data(), numElements, vertexShaderBuffer->GetBufferPointer(),
-			vertexShaderBuffer->GetBufferSize(), &m_layout);
+		result = device->CreateInputLayout(
+			polygonLayout.data(), 
+			numElements, 
+			vertexShaderBuffer->GetBufferPointer(),
+			vertexShaderBuffer->GetBufferSize(), 
+			&m_layout
+		);
 		if (Failed(result))
-		{
 			return false;
-		}
 
 		// Release the vertex shader buffer and pixel shader buffer since they are no longer needed.
 		vertexShaderBuffer->Release();
@@ -180,7 +165,6 @@ private:
 
 		pixelShaderBuffer->Release();
 		pixelShaderBuffer = 0;
-
 
 		// Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
 		auto matrixBufferDesc = D3D11_BUFFER_DESC{
@@ -191,13 +175,10 @@ private:
 			.MiscFlags = 0,
 			.StructureByteStride = 0
 		};
-
 		// Create the constant buffer pointer so we can access the vertex shader constant buffer from within this class.
 		result = device->CreateBuffer(&matrixBufferDesc, nullptr, &m_matrixBuffer);
 		if (Failed(result))
-		{
 			return false;
-		}
 
 		return true;
 	}
@@ -281,9 +262,7 @@ private:
 		auto mappedResource = D3D11_MAPPED_SUBRESOURCE{};
 		auto result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 		if (Failed(result))
-		{
 			return false;
-		}
 
 		// Get a pointer to the data in the constant buffer.
 		auto dataPtr = reinterpret_cast<MatrixBufferType*>(mappedResource.pData);

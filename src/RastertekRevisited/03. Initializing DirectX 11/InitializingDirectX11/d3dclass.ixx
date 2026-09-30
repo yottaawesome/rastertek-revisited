@@ -64,13 +64,11 @@ public:
 		auto denominator = 0u;
 		for (auto i = 0u; i < numModes; i++)
 		{
-			if (displayModeList[i].Width == static_cast<unsigned int>(screenWidth))
+			if (displayModeList[i].Width == static_cast<unsigned int>(screenWidth)
+				and displayModeList[i].Height == static_cast<unsigned int>(screenHeight))
 			{
-				if (displayModeList[i].Height == static_cast<unsigned int>(screenHeight))
-				{
-					numerator = displayModeList[i].RefreshRate.Numerator;
-					denominator = displayModeList[i].RefreshRate.Denominator;
-				}
+				numerator = displayModeList[i].RefreshRate.Numerator;
+				denominator = displayModeList[i].RefreshRate.Denominator;
 			}
 		}
 
@@ -85,7 +83,7 @@ public:
 
 		// Convert the name of the video card to a character array and store it.
 		auto stringLength = 0ull;
-		int error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
+		auto error = wcstombs_s(&stringLength, m_videoCardDescription, 128, adapterDesc.Description, 128);
 		if (error != 0)
 			return false;
 
@@ -284,8 +282,8 @@ public:
 		m_deviceContext->RSSetViewports(1, &m_viewport);
 
 		// Setup the projection matrix.
-		float fieldOfView = 3.141592654f / 4.0f;
-		float screenAspect = (float)screenWidth / (float)screenHeight;
+		auto fieldOfView = 3.141592654f / 4.0f;
+		auto screenAspect = (float)screenWidth / (float)screenHeight;
 
 		// Create the projection matrix for 3D rendering.
 		m_projectionMatrix = DirectX::XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
@@ -360,17 +358,11 @@ public:
 
     void BeginScene(float red, float green, float blue, float alpha)
     {
-        float color[4];
-
-
-        // Setup the color to clear the buffer to.
-        color[0] = red;
-        color[1] = green;
-        color[2] = blue;
-        color[3] = alpha;
+		// Setup the color to clear the buffer to.
+		auto color = std::array{ red, green, blue, alpha };
 
         // Clear the back buffer.
-        m_deviceContext->ClearRenderTargetView(m_renderTargetView, color);
+        m_deviceContext->ClearRenderTargetView(m_renderTargetView, color.data());
 
         // Clear the depth buffer.
         m_deviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH, 1.0f, 0);
@@ -434,9 +426,9 @@ public:
     }
 
 private:
-    bool m_vsync_enabled;
-    int m_videoCardMemory;
-    char m_videoCardDescription[128];
+    bool m_vsync_enabled = false;
+    int m_videoCardMemory = 0;
+    char m_videoCardDescription[128] = {};
     IDXGISwapChain* m_swapChain = nullptr;
     ID3D11Device* m_device = nullptr;
     ID3D11DeviceContext* m_deviceContext = nullptr;

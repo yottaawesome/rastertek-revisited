@@ -41,7 +41,7 @@ public:
 		// Create and initialize the application class object.  This object will handle rendering all the graphics for this application.
 		m_Application = new ApplicationClass;
 
-		if (!m_Application->Initialize(screenWidth, screenHeight, m_hwnd))
+		if (not m_Application->Initialize(screenWidth, screenHeight, m_hwnd))
 			return false;
 
 		return true;
@@ -66,8 +66,6 @@ public:
 
 		// Shutdown the window.
 		ShutdownWindows();
-
-		return;
 	}
 
 	void Run()
@@ -251,8 +249,6 @@ private:
 
 		// Release the pointer to this class.
 		ApplicationHandle = nullptr;
-
-		return;
 	}
 
 	static auto WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam) -> LRESULT

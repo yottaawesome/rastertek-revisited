@@ -50,9 +50,7 @@ public:
 	{
 		// Render the graphics scene.
 		if (!Render())
-		{
 			return false;
-		}
 
 		return true;
 	}

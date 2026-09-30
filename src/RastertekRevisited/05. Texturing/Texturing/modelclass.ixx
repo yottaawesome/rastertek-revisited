@@ -20,7 +20,7 @@ private:
 	};
 
 public:
-	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename) -> bool
+	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& textureFilename) -> bool
 	{
 		// Initialize the vertex and index buffers.
 		auto result = InitializeBuffers(device);
@@ -178,7 +178,7 @@ private:
 		deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
 
-	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename) -> bool
+	auto LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Create and initialize the texture object.
 		m_Texture = new TextureClass;
@@ -198,8 +198,6 @@ private:
 			delete m_Texture;
 			m_Texture = 0;
 		}
-
-		return;
 	}
 
 private:

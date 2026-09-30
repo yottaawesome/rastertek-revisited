@@ -2,9 +2,6 @@
 // Filename: systemclass.ixx
 ////////////////////////////////////////////////////////////////////////////////
 export module demo:systemclass;
-///////////////////////
-// MY CLASS INCLUDES //
-///////////////////////
 import win32;
 import :inputclass;
 import :applicationclass;
@@ -19,10 +16,6 @@ public:
 	// GLOBALS //
 	/////////////
 	static inline auto ApplicationHandle = static_cast<SystemClass*>(nullptr);
-
-	SystemClass() = default;
-
-	SystemClass(const SystemClass&) = default;
 
 	auto Initialize() -> bool
 	{

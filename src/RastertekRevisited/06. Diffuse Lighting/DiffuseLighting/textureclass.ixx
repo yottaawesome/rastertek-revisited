@@ -22,11 +22,11 @@ private:
 	};
 
 public:
-	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename) -> bool
+	auto Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const std::string& filename) -> bool
 	{
 		// Load the targa image data into memory.
-		bool result = LoadTarga32Bit(filename);
-		if (!result)
+		auto result = LoadTarga32Bit(filename);
+		if (not result)
 			return false;
 
 		// Setup the description of the texture.
@@ -46,15 +46,13 @@ public:
 		// Create the empty texture.
 		auto hResult = device->CreateTexture2D(&textureDesc, nullptr, &m_texture);
 		if (Failed(hResult))
-		{
 			return false;
-		}
 
 		// Set the row pitch of the targa image data.
 		auto rowPitch = static_cast<unsigned int>((m_width * 4) * sizeof(unsigned char));
 
 		// Copy the targa image data into the texture.
-		deviceContext->UpdateSubresource(m_texture, 0, nullptr, m_targaData, rowPitch, 0);
+		deviceContext->UpdateSubresource(m_texture, 0, nullptr, m_targaData.data(), rowPitch, 0);
 
 		// Setup the shader resource view description.
 		auto srvDesc = D3D11_SHADER_RESOURCE_VIEW_DESC{
@@ -77,8 +75,7 @@ public:
 		deviceContext->GenerateMips(m_textureView);
 
 		// Release the targa image data now that the image data has been loaded into the texture.
-		delete[] m_targaData;
-		m_targaData = 0;
+		m_targaData.clear();
 
 		return true;
 	}
@@ -100,11 +97,7 @@ public:
 		}
 
 		// Release the targa data.
-		if (m_targaData)
-		{
-			delete[] m_targaData;
-			m_targaData = 0;
-		}
+		m_targaData.clear();
 
 		return;
 	}
@@ -125,57 +118,46 @@ public:
 	}
 
 private:
-	auto LoadTarga32Bit(char* filename) -> bool
+	auto LoadTarga32Bit(const std::string& filename) -> bool
 	{
 		// Open the targa file for reading in binary.
 		auto filePtr = static_cast<FILE*>(nullptr);
-		auto error = fopen_s(&filePtr, filename, "rb");
+		auto error = fopen_s(&filePtr, filename.c_str(), "rb");
 		if (error != 0)
-		{
 			return false;
-		}
 
 		// Read in the file header.
-		TargaHeader targaFileHeader;
-		auto count = (unsigned int)fread(&targaFileHeader, sizeof(TargaHeader), 1, filePtr);
+		auto targaFileHeader = TargaHeader{};
+		auto count = static_cast<unsigned int>(fread(&targaFileHeader, sizeof(TargaHeader), 1, filePtr));
 		if (count != 1)
-		{
 			return false;
-		}
 
 		// Get the important information from the header.
-		m_height = (int)targaFileHeader.height;
-		m_width = (int)targaFileHeader.width;
-		auto bpp = (int)targaFileHeader.bpp;
+		m_height = static_cast<int>(targaFileHeader.height);
+		m_width = static_cast<int>(targaFileHeader.width);
+		auto bpp = static_cast<int>(targaFileHeader.bpp);
 
 		// Check that it is 32 bit and not 24 bit.
 		if (bpp != 32)
-		{
 			return false;
-		}
 
 		// Calculate the size of the 32 bit image data.
 		auto imageSize = m_width * m_height * 4;
-
 		// Allocate memory for the targa image data.
-		auto targaImage = new unsigned char[imageSize];
+		auto targaImage = std::vector<unsigned char>(imageSize);
 
 		// Read in the targa image data.
-		count = (unsigned int)fread(targaImage, 1, imageSize, filePtr);
+		count = static_cast<unsigned int>(fread(targaImage.data(), 1, imageSize, filePtr));
 		if (count != imageSize)
-		{
 			return false;
-		}
 
 		// Close the file.
 		error = fclose(filePtr);
 		if (error != 0)
-		{
 			return false;
-		}
 
 		// Allocate memory for the targa destination data.
-		m_targaData = new unsigned char[imageSize];
+		m_targaData = std::vector<unsigned char>(imageSize);
 
 		// Initialize the index into the targa destination data array.
 		auto index = 0;
@@ -202,15 +184,11 @@ private:
 			k -= (m_width * 8);
 		}
 
-		// Release the targa image data now that it was copied into the destination array.
-		delete[] targaImage;
-		targaImage = 0;
-
 		return true;
 	}
 
 private:
-	unsigned char* m_targaData = nullptr;
+	std::vector<unsigned char> m_targaData;
 	ID3D11Texture2D* m_texture = nullptr;
 	ID3D11ShaderResourceView* m_textureView = nullptr;
 	int m_width = 0;

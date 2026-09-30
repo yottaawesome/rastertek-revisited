@@ -42,13 +42,13 @@
     <ClCompile Include="systemclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="win32.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="textureshaderclass.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="textureclass.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="win32.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -28,8 +28,8 @@ public:
 		// Create and initialize the Direct3D object.
 		m_Direct3D = new D3DClass;
 
-		bool result = m_Direct3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
-		if (!result)
+		auto result = m_Direct3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
+		if (not result)
 		{
 			MessageBoxW(hwnd, L"Could not initialize Direct3D", L"Error", MB::Ok);
 			return false;
@@ -45,7 +45,7 @@ public:
 		m_Model = new ModelClass;
 
 		result = m_Model->Initialize(m_Direct3D->GetDevice());
-		if (!result)
+		if (not result)
 		{
 			MessageBoxW(hwnd, L"Could not initialize the model object.", L"Error", MB::Ok);
 			return false;
@@ -55,7 +55,7 @@ public:
 		m_ColorShader = new ColorShaderClass;
 
 		result = m_ColorShader->Initialize(m_Direct3D->GetDevice(), hwnd);
-		if (!result)
+		if (not result)
 		{
 			MessageBoxW(hwnd, L"Could not initialize the color shader object.", L"Error", MB::Ok);
 			return false;
@@ -101,10 +101,8 @@ public:
 	auto Frame() -> bool
 	{
 		// Render the graphics scene.
-		if (!Render())
-		{
+		if (not Render())
 			return false;
-		}
 
 		return true;
 	}
@@ -112,9 +110,6 @@ public:
 private:
 	auto Render() -> bool
 	{
-		DirectX::XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
-		bool result;
-
 		// Clear the buffers to begin the scene.
 		m_Direct3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -122,19 +117,20 @@ private:
 		m_Camera->Render();
 
 		// Get the world, view, and projection matrices from the camera and d3d objects.
+		DirectX::XMMATRIX worldMatrix;
 		m_Direct3D->GetWorldMatrix(worldMatrix);
+		DirectX::XMMATRIX viewMatrix;
 		m_Camera->GetViewMatrix(viewMatrix);
+		DirectX::XMMATRIX projectionMatrix;
 		m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
 		// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
 		m_Model->Render(m_Direct3D->GetDeviceContext());
 
 		// Render the model using the color shader.
-		result = m_ColorShader->Render(m_Direct3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix);
-		if (!result)
-		{
+		auto result = m_ColorShader->Render(m_Direct3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix);
+		if (not result)
 			return false;
-		}
 
 		// Present the rendered scene to the screen.
 		m_Direct3D->EndScene();

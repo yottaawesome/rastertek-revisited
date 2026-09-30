@@ -1,2 +1,10 @@
 export module demo;
-
+export import :textureclass;
+export import :modelclass;
+export import :cameraclass;
+export import :lightclass;
+export import :inputclass;
+export import :lightshaderclass;
+export import :applicationclass;
+export import :systemclass;
+export import :d3dclass;

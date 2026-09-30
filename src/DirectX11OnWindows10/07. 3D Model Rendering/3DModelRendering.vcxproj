@@ -149,29 +149,18 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="applicationclass.cpp" />
-    <ClCompile Include="cameraclass.cpp" />
-    <ClCompile Include="d3dclass.cpp" />
+    <ClCompile Include="applicationclass.ixx" />
+    <ClCompile Include="cameraclass.ixx" />
+    <ClCompile Include="d3dclass.ixx" />
     <ClCompile Include="demo.ixx" />
-    <ClCompile Include="inputclass.cpp" />
-    <ClCompile Include="lightclass.cpp" />
-    <ClCompile Include="lightshaderclass.cpp" />
+    <ClCompile Include="inputclass.ixx" />
+    <ClCompile Include="lightclass.ixx" />
+    <ClCompile Include="lightshaderclass.ixx" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="modelclass.cpp" />
-    <ClCompile Include="systemclass.cpp" />
-    <ClCompile Include="textureclass.cpp" />
+    <ClCompile Include="modelclass.ixx" />
+    <ClCompile Include="systemclass.ixx" />
+    <ClCompile Include="textureclass.ixx" />
     <ClCompile Include="win32.ixx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="applicationclass.h" />
-    <ClInclude Include="cameraclass.h" />
-    <ClInclude Include="d3dclass.h" />
-    <ClInclude Include="inputclass.h" />
-    <ClInclude Include="lightclass.h" />
-    <ClInclude Include="lightshaderclass.h" />
-    <ClInclude Include="modelclass.h" />
-    <ClInclude Include="systemclass.h" />
-    <ClInclude Include="textureclass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="light.ps.hlsl" />

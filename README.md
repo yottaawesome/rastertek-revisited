@@ -37,7 +37,7 @@ The following changes have been done. This is just a running list, and more is p
 * Replaced various raw C string arrays and their related functions with `std::string`/`std::wstring` and their related types.
 * Destructors actually tear down objects.
 * Vertex and pixel shader files have been given the `.hlsl` extension to allow proper syntax highlighting in Visual Studio (they have been disabled in the auto build process, as the samples compile them at runtime).
-* The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary.
+* The directories have been flattened. So far, the samples are too small and self-contained to make additional subdirectories necessary, especially given the use of C++ modules has essentially halved the file count.
 * Converted code to use _Almost Always Auto_ idiom.
 * The idiosyncratic use of `return` statements at the end of void functions has been removed.
 * Initialisation of class member variables (e.g. to null out pointers) is now done inline, which removes the need for default constructors that do nothing other than default initialise class members. At this point, I'm undecided whether to keep the two-phase construction cycle or remove it, but if I do remove it, I will move the initialisation logic into the default constructor.

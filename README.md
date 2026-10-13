@@ -20,7 +20,7 @@ The first tutorials from this series have been updated (I've excluded the first 
 * [05. Texturing](<src/DirectX11OnWindows10/05. Texturing>)
 * [06. Diffuse Lighting](<src/DirectX11OnWindows10/06. Diffuse Lighting>)
 * [07. 3D Model Rendering](<src/DirectX11OnWindows10/07. 3D Model Rendering>)
-* [08. 3D Model Rendering](<src/DirectX11OnWindows10/08. Scaling, Rotation, and Translation>)
+* [08. Scaling, Rotation, and Translation](<src/DirectX11OnWindows10/08. Scaling, Rotation, and Translation>)
 
 ## Changes
 

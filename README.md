@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Rastertek's [DX11 tutorials](https://www.rastertek.com) DirectX11 tutorials are still an extremely useful resource for learning DirectX 11, even if they are a little dated now. The aim of this repo is to revisit the source code from the tutorials and modernise it. This does not supplant the original tutorials and you still need to follow them to understand what's going on (seriously, those tutorials are great).
+Rastertek's [DirectX 11 tutorials](https://www.rastertek.com) are still an extremely useful resource for learning DirectX 11, even if they are a little old now. The good thing about these tutorials is they avoid the deprecated FX11 shader framework, which is a common issue with other DX11 resources available online. The aim of this repo is to revisit the source code from the tutorials and modernise it. This does not supplant the original tutorials and you still need to follow them to understand what's going on (seriously, those tutorials are great).
 
 ## Building
 
@@ -20,6 +20,7 @@ The first tutorials from this series have been updated (I've excluded the first 
 * [05. Texturing](<src/DirectX11OnWindows10/05. Texturing>)
 * [06. Diffuse Lighting](<src/DirectX11OnWindows10/06. Diffuse Lighting>)
 * [07. 3D Model Rendering](<src/DirectX11OnWindows10/07. 3D Model Rendering>)
+* [08. 3D Model Rendering](<src/DirectX11OnWindows10/08. Scaling, Rotation, and Translation>)
 
 ## Changes
 

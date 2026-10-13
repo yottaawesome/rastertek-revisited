@@ -25,6 +25,6 @@
     <Project Path="07. 3D Model Rendering/3DModelRendering.vcxproj" Id="67e118ea-8605-41d1-a924-57aabbd9004c" />
   </Folder>
   <Folder Name="/08. Scaling, Rotation, and Translation/">
-    <Project Path="08. Scaling, Rotation, and Translation/ScalingRotationAndTranslation/ScalingRotationAndTranslation.vcxproj" Id="4d431339-4af5-4f02-99d0-326594ff6cca" />
+    <Project Path="08. Scaling, Rotation, and Translation/ScalingRotationAndTranslation.vcxproj" Id="4d431339-4af5-4f02-99d0-326594ff6cca" />
   </Folder>
 </Solution>
